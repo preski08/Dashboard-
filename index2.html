@@ -1,1 +1,675 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hero Profile Dashboard</title>
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0d0814;
+            background-image: url("https://raw.githubusercontent.com/preski08/DompetkuX001/cf871374574f76b31624ad5ab74f4e194a19c4a4/dashboard/bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 10px;
+            padding-bottom: 50px; 
+        }
+
+        /* Container Utama */
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: #0d0814;
+            background-image:
+                linear-gradient(180deg, rgba(24, 15, 38, 0.72) 0%, rgba(13, 8, 20, 0.88) 100%),
+                url("https://raw.githubusercontent.com/preski08/DompetkuX001/cf871374574f76b31624ad5ab74f4e194a19c4a4/dashboard/bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid #2a1b40;
+            position: relative;
+        }
+
+        /* === 1 KOTAK BAGIAN ATAS (Header + Banner) === */
+        .top-section-box {
+            border: 1px solid #3c2759;
+            border-radius: 12px;
+            background-color: rgba(21, 11, 34, 0.75);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent; 
+            padding: 0 5px; 
+            border-radius: 0;
+            border: none; 
+            gap: 5px;
+            min-height: 55px; 
+        }
+
+        .profile-btn {
+            background: linear-gradient(90deg, #5e1ca6, #8d3cf5);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.1s ease;
+        }
+        .profile-btn:active {
+            transform: scale(0.92);
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stars {
+            color: #ffb800;
+            font-size: 9px;
+            display: flex;
+            gap: 2px;
+        }
+
+        .icon-box {
+            background-color: #2b1b3d;
+            border: 1px solid #3c2759;
+            color: #a18fb8;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 9px;
+            position: relative;
+        }
+
+        .icon-box.mail-notif::after {
+            content: '17';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background-color: #ff4d4d;
+            color: white;
+            font-size: 7px;
+            padding: 1px 3px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .combat-btn {
+            background: transparent;
+            color: white;
+            padding: 0 0 2px 0;
+            font-size: 11px; 
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px; 
+            border: none;
+            border-bottom: 1.5px solid #ffffff;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .combat-btn img {
+            height: 45px; 
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: -10px 0; 
+        }
+
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background-color: #11091a;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            overflow: visible;
+        }
+
+        .hero-name-box {
+            background-color: rgba(17, 9, 26, 0.95);
+            border: 1px solid #4a3466;
+            padding: 8px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* === ZONE SECTION === */
+        .zone-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .zone-card {
+            height: 85px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; 
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05), 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .zone-card:active {
+            transform: scale(0.92);
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3), 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        .zone-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .zone-rank { background-image: url("https://raw.githubusercontent.com/preski08/DompetkuX001/27204ab4dc23f05f00c3c9ea2110e69df7ac8a49/dashboard/rank.png"); }
+        .zone-classic { background-image: url("https://raw.githubusercontent.com/preski08/DompetkuX001/27204ab4dc23f05f00c3c9ea2110e69df7ac8a49/dashboard/classic.png"); }
+        .zone-dungeon { background-image: url("https://raw.githubusercontent.com/preski08/DompetkuX001/27204ab4dc23f05f00c3c9ea2110e69df7ac8a49/dashboard/dugeon.png"); }
+
+        .zone-text-label {
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            font-size: 9px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+            z-index: 2;
+            text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #aaaaaa;
+            animation: whiteGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes whiteGlow {
+            0% { text-shadow: 0 0 3px #ffffff, 0 0 6px #ffffff; }
+            100% { text-shadow: 0 0 8px #ffffff, 0 0 15px #ffffff, 0 0 20px #aaaaaa; }
+        }
+
+        .zone-title {
+            position: absolute;
+            bottom: 8px; 
+            width: 100%;
+            left: 0;
+            text-align: center; 
+            z-index: 3; 
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        .zone-rank .zone-title { color: #00ffff; text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff, 0 0 20px #0088ff; animation: blueGlow 1.5s ease-in-out infinite alternate; }
+        @keyframes blueGlow { 0% { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #0088ff; } 100% { text-shadow: 0 0 10px #66ffff, 0 0 20px #00ffff, 0 0 30px #0088ff; } }
+
+        .zone-classic .zone-title { color: #ffffff; text-shadow: 0 0 8px #ffffff, 0 0 12px #ffffff, 0 0 20px #aaaaaa; animation: whiteGlow 1.5s ease-in-out infinite alternate; }
+
+        .zone-dungeon .zone-title { color: #ff4d4d; text-shadow: 0 0 8px #ff0000, 0 0 12px #ff0000, 0 0 20px #990000; animation: redGlow 1.5s ease-in-out infinite alternate; }
+        @keyframes redGlow { 0% { text-shadow: 0 0 5px #ff3333, 0 0 10px #ff0000, 0 0 15px #990000; } 100% { text-shadow: 0 0 10px #ff6666, 0 0 20px #ff0000, 0 0 30px #ff0000; } }
+
+        /* === MODE SELECTOR === */
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6); 
+            position: relative;
+            overflow: hidden; 
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05), 0 4px 6px rgba(0, 0, 0, 0.3); 
+            border-radius: 12px;
+            padding: 10px 0;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1;
+        }
+
+        .mode-selector::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        .mode-item { display: flex; align-items: center; gap: 6px; cursor: pointer; position: relative; z-index: 2; }
+        .mode-item input[type="radio"] { display: none; }
+        .icon-wrapper { position: relative; display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; }
+        .icon-wrapper .mode-icon { font-size: 15px; color: rgba(255, 255, 255, 0.5); transition: color 0.2s ease; }
+        .icon-wrapper .check-mark { display: none; position: absolute; bottom: -2px; right: -4px; font-size: 7px; background-color: #9d5cf5; color: white; border-radius: 50%; width: 12px; height: 12px; justify-content: center; align-items: center; border: 1.5px solid #11091a; }
+        .mode-item input[type="radio"]:checked ~ .icon-wrapper .mode-icon { color: #9d5cf5; } 
+        .mode-item input[type="radio"]:checked ~ .icon-wrapper .check-mark { display: flex; }
+        .mode-item input[type="radio"]:checked ~ span { color: #ffffff; font-weight: 600; } 
+
+        /* === EVENT SECTION (VIDEO) === */
+        .event-section {
+            border: 1px solid #3c2759;
+            border-radius: 12px;
+            padding: 0; 
+            overflow: hidden; 
+            background-color: rgba(21, 11, 34, 0.75);
+            backdrop-filter: blur(4px);
+        }
+
+        .event-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+
+        /* Menghapus background hitam pada card */
+        .event-card {
+            background-color: #11091a; /* Tetap ada sebagai fallback saat loading */
+            border: none; 
+            border-radius: 0; 
+            display: flex;
+            flex-direction: column;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; 
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .event-card:active { transform: scale(0.95); filter: brightness(1.3); }
+
+        .event-card.video-card video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%) rotate(-90deg) scale(1.05);
+            z-index: 0;
+        }
+
+        #heroGachaVideo { transform: translate(-50%, -50%) scale(1.05) !important; }
+
+        .event-card.video-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(17, 9, 26, 0.95) 0%, rgba(17, 9, 26, 0) 100%);
+            z-index: 1;
+        }
+
+        .event-name-overlay {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            z-index: 2;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.2;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .event-inner-title {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 9px;
+            color: #d8b4fe;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+            text-shadow: 0 0 4px #9d5cf5, 0 0 8px #9d5cf5, 0 0 12px #8d3cf5, 0 0 16px #5e1ca6;
+            animation: auraGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes auraGlow { 0% { text-shadow: 0 0 3px #9d5cf5, 0 0 6px #9d5cf5, 0 0 10px #8d3cf5; } 100% { text-shadow: 0 0 6px #d8b4fe, 0 0 12px #9d5cf5, 0 0 18px #8d3cf5, 0 0 24px #5e1ca6; } }
+
+        /* === FOOTER BAR === */
+        .footer-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; 
+            background-color: rgba(21, 11, 34, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid #3c2759;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .footer-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+
+        .topup-btn, .currency-box, .merge-btn, .exit-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px; 
+            color: #ffffff;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05), 0 4px 6px rgba(0,0,0,0.1);
+            height: 32px; 
+            display: flex;
+            align-items: center;
+            transition: transform 0.1s ease, background 0.2s ease, filter 0.1s ease;
+        }
+
+        .topup-btn:active, .merge-btn:active, .exit-btn:active { transform: scale(0.92); background: rgba(255, 255, 255, 0.2); filter: brightness(1.2); }
+
+        .topup-btn { font-weight: 600; font-size: 10px; padding: 0 8px; gap: 5px; cursor: pointer; white-space: nowrap; }
+        .topup-btn img { height: 18px; width: auto; }
+
+        .currency-box { padding: 0 6px; justify-content: space-between; gap: 4px; flex: 1; min-width: 0; cursor: default; }
+        .currency-label { font-size: 9px; font-weight: 500; color: #ffffff; line-height: 1.1; text-align: left; margin-left: 2px; flex-grow: 1; }
+        .currency-icon { width: 16px; height: 16px; object-fit: contain; flex-shrink: 0; }
+        .currency-value { font-weight: 700; font-size: 9px; margin-left: 2px; white-space: nowrap; }
+
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        .merge-btn, .exit-btn { flex: 1; padding: 0 10px; font-size: 11px; font-weight: 600; justify-content: center; gap: 6px; cursor: pointer; }
+        .exit-btn { color: #ff8c9f; border: 1px solid rgba(255, 140, 159, 0.4); }
+        .merge-btn img, .exit-btn img { height: 24px; width: auto; display: block; object-fit: contain; filter: invert(1) brightness(2) drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.6)); }
+
+
+        /* ========================================================= */
+        /* === KUNCI LANDSCAPE (FULL SCREEN & TANPA JEDA HITAM) ==== */
+        /* ========================================================= */
+        
+        .rotate-overlay {
+            display: none; position: fixed; inset: 0;
+            background-color: #0d0814;
+            background-image: linear-gradient(180deg, rgba(24, 15, 38, 0.9) 0%, rgba(13, 8, 20, 0.95) 100%);
+            z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center; padding: 20px;
+        }
+
+        .rotate-overlay i { font-size: 70px; color: #9d5cf5; margin-bottom: 20px; animation: rotatePhone 2s ease-in-out infinite; }
+        @keyframes rotatePhone { 0% { transform: rotate(0deg); } 50% { transform: rotate(90deg); } 100% { transform: rotate(90deg); } }
+        .rotate-overlay h2 { font-size: 20px; margin-bottom: 10px; text-shadow: 0 0 10px rgba(157, 92, 245, 0.5); }
+        .rotate-overlay p { font-size: 13px; color: #a18fb8; }
+
+        /* Layar Tegak (Portrait) */
+        @media (orientation: portrait) {
+            body { overflow: hidden; }
+            .app-container { display: none !important; }
+            .rotate-overlay { display: flex; }
+        }
+
+        /* Layar Mendatar (Landscape) - MENCEGAH GACHA HILANG & JEDA HITAM */
+        @media (orientation: landscape) {
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                background-color: #0d0814;
+                overflow-y: auto !important;
+                display: flex;
+                justify-content: center;
+            }
+
+            .app-container {
+                max-width: 100vw !important;
+                width: 100vw !important;
+                min-height: 100vh;
+                height: auto; 
+                border-radius: 0; 
+                border: none; 
+                padding: 10px 15px; 
+                box-shadow: none;
+                gap: 10px; 
+            }
+
+            .top-section-box, .zone-cards, .mode-selector, .event-section, .footer-bar {
+                flex-shrink: 0; 
+            }
+
+            .hero-banner {
+                height: 20vh; 
+                min-height: 100px; 
+            }
+
+            .zone-card {
+                height: 15vh; 
+                min-height: 65px; 
+            }
+
+            .mode-selector {
+                padding: 6px 0;
+            }
+
+            .event-cards {
+                gap: 4px; 
+            }
+
+            /* Batas minimal video Gacha agar tidak hilang */
+            .event-card {
+                height: 20vh; 
+                min-height: 80px; 
+            }
+
+            /* === PERBAIKAN TOTAL JEDA HITAM === */
+            /* Kita hapus paksaan rotasi di landscape agar video mengikuti bentuk kotak */
+            .event-card.video-card video, 
+            #heroGachaVideo {
+                transform: translate(-50%, -50%) !important; 
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .footer-bar {
+                padding: 8px 10px;
+            }
+
+            .rotate-overlay { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OVERLAY PEMAKSA ROTASI LAYAR -->
+    <div class="rotate-overlay">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+        <h2>Putar Layar Anda</h2>
+        <p>Silakan putar HP Anda ke posisi mendatar (Landscape) untuk melihat dashboard.</p>
+    </div>
+
+    <div class="app-container">
+
+        <!-- BAGIAN ATAS (1 KOTAK) -->
+        <div class="top-section-box">
+            <div class="header">
+                <button class="profile-btn">Profile</button>
+                <div class="header-icons">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="icon-box"><i class="fa-solid fa-gear"></i></div>
+                    <div class="icon-box"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div class="icon-box mail-notif"><i class="fa-solid fa-envelope"></i></div>
+                </div>
+                <button class="combat-btn">
+                    <img src="https://raw.githubusercontent.com/preski08/DompetkuX001/987851272e545359e9b58bd66f96519cd0ca0e4e/dashboard/CombatPath.png" alt="Combat Path">
+                    Combat Path
+                </button>
+            </div>
+
+            <div class="hero-banner">
+                <div class="hero-name-box">NAME HERO</div>
+            </div>
+        </div>
+
+        <!-- ZONE SECTION -->
+        <div class="zone-cards">
+            <div class="zone-card zone-rank">
+                <span class="zone-text-label">ZONE</span>
+                <span class="zone-title">RANK</span>
+            </div>
+
+            <div class="zone-card zone-classic">
+                <span class="zone-text-label">ZONE</span>
+                <span class="zone-title">CLASSIC</span>
+            </div>
+
+            <div class="zone-card zone-dungeon">
+                <span class="zone-text-label">ZONE</span>
+                <span class="zone-title">DUNGEON</span>
+            </div>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <label class="mode-item">
+                <input type="radio" name="game-mode" checked>
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-user mode-icon"></i>
+                    <i class="fa-solid fa-check check-mark"></i>
+                </div>
+                <span>Solo</span>
+            </label>
+            <label class="mode-item">
+                <input type="radio" name="game-mode">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-user-group mode-icon"></i>
+                    <i class="fa-solid fa-check check-mark"></i>
+                </div>
+                <span>Duo</span>
+            </label>
+            <label class="mode-item">
+                <input type="radio" name="game-mode">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-users mode-icon"></i>
+                    <i class="fa-solid fa-check check-mark"></i>
+                </div>
+                <span>Party</span>
+            </label>
+        </div>
+
+        <!-- Event Section -->
+        <div class="event-section">
+            <div class="event-cards">
+                <div class="event-card video-card">
+                    <video id="weaponGachaVideo" autoplay loop muted playsinline preload="auto">
+                        <source src="https://raw.githubusercontent.com/preski08/DompetkuX001/6bc1c5a49d7cf7dd57480708501f526d707e77c0/dashboard/weaponGacha.mp4" type="video/mp4">
+                    </video>
+                    <div class="event-inner-title">EVENT</div>
+                    <div class="event-name-overlay">Weapon<br>Gacha</div>
+                </div>
+
+                <div class="event-card video-card">
+                    <video id="heroGachaVideo" autoplay loop muted playsinline preload="auto">
+                        <source src="https://raw.githubusercontent.com/preski08/DompetkuX001/e1992353a128da9197a90a21edb5b6c379e6c42b/dashboard/HeroGatcha.mp4" type="video/mp4">
+                    </video>
+                    <div class="event-inner-title">EVENT</div>
+                    <div class="event-name-overlay">Hero<br>Gacha</div>
+                </div>
+
+                <div class="event-card video-card">
+                    <video id="shopVideo" autoplay loop muted playsinline preload="auto">
+                        <source src="https://raw.githubusercontent.com/preski08/DompetkuX001/2df78f1cfe1c414205bcac17e53282efafca802a/dashboard/Shop.mp4" type="video/mp4">
+                    </video>
+                    <div class="event-inner-title">EVENT</div>
+                    <div class="event-name-overlay">Shop</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bar -->
+        <div class="footer-bar">
+            <div class="footer-top">
+                <button class="topup-btn">
+                    <img src="https://raw.githubusercontent.com/preski08/DompetkuX001/987851272e545359e9b58bd66f96519cd0ca0e4e/dashboard/TopUp.png" alt="Top Up">
+                    Top Up
+                </button>
+
+                <div class="currency-box">
+                    <img src="https://raw.githubusercontent.com/preski08/DompetkuX001/987851272e545359e9b58bd66f96519cd0ca0e4e/dashboard/Gem.png" alt="Gem" class="currency-icon">
+                    <span class="currency-label">Gem</span>
+                    <span class="currency-value">1,250</span>
+                </div>
+
+                <div class="currency-box">
+                    <img src="https://raw.githubusercontent.com/preski08/DompetkuX001/987851272e545359e9b58bd66f96519cd0ca0e4e/dashboard/fragmenGem.png" alt="Fragmen Gem" class="currency-icon">
+                    <span class="currency-label">Fragmen<br>Gem</span>
+                    <span class="currency-value">320</span>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <button class="merge-btn">
+                    <img src="https://raw.githubusercontent.com/preski08/DompetkuX001/987851272e545359e9b58bd66f96519cd0ca0e4e/dashboard/MergeGem.png" alt="Merge Gem">
+                    Merge Gem
+                </button>
+                <button class="exit-btn">
+                    <img src="https://raw.githubusercontent.com/preski08/DompetkuX001/987851272e545359e9b58bd66f96519cd0ca0e4e/dashboard/Exit.png" alt="Exit">
+                    Exit
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
